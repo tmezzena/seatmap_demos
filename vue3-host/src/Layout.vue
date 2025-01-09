@@ -8,8 +8,9 @@
       <!-- remote-component REMOTE -->
       <div class="app-label">#remote-component [REMOTE]</div>
       <reserved-seat-map
-        event-identifier="11efc20862006f4180f100155dab0b0d"
+        event-identifier="11efcc546cff279d80f100155dab0b0d"
         custom-reserve-identifier="de28aec6-fbb3-4265-80f0-88c0420990a5"
+        seat-sector-type="132"
         :total-tickets=2
         @seat-select-changed="seatSelectChanged"
         @loaded="seatMapLoaded"

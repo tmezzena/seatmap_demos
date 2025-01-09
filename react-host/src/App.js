@@ -5,7 +5,8 @@ const App = () => {
   const totalTickets = 2;
   const mountEl = React.useRef(null);
   const [seatStatus, setSeatStatus] = React.useState([]);
-  const [seatKinds, setseatKinds] = React.useState([]);
+  const [seatKinds, setSeatKinds] = React.useState([]);
+  const [sectors, setSectors] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
   const [allChosen, setAllChosen] = React.useState(false);
 
@@ -16,10 +17,12 @@ const App = () => {
   const seatMapLoaded = (infos) => {
     console.log('seatMapLoaded', infos);
     setSeatStatus(infos.seatStatus);
-    setseatKinds(infos.seatKinds);
+    setSeatKinds(infos.seatKinds);
+    setSectors(infos.sectors);
     setLoading(false);
   };
   const seatMapError = (error) => {
+    setLoading(false);
     console.log('seatMapError', error);
   };
 
@@ -27,8 +30,9 @@ const App = () => {
     if (mountEl.current.innerHTML.length === 0) {
       console.log('ReservedSeatMapWrapper');
       const el = ReservedSeatMapWrapper(mountEl.current, {
-        eventIdentifier: '11efc20862006f4180f100155dab0b0d',
+        eventIdentifier: '11efcc546cff279d80f100155dab0b0d',
         customReserveIdentifier: 'de28aec6-fbb3-4265-80f0-88c0420990a5',
+        seatSectorType: "132",
         totalTickets: totalTickets,
         onSeatSelectChanged: seatSelectChanged,
         onLoaded: seatMapLoaded,
@@ -72,6 +76,13 @@ const App = () => {
             }
             {item.name}
           </div>
+      ))}     
+
+      <div style={{paddingTop: '15px'}}>Setores:</div>
+      {sectors.map(item => (
+        <div style={{color: item.color ?? '' != '' ? item.color : null}}>
+        {item.name}
+        </div>
       ))}     
 
     </div>
